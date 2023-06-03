@@ -25,16 +25,11 @@ public class Item {
     @Column(name = "quantity")
     private int quantity;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "category_id")
     private Category category;
 
     @Column(name = "description")
     private String description;
 
-    public Item(BigDecimal price, int quantity, Category category) {
-        this.price = price;
-        this.quantity = quantity;
-        this.category = category;
-    }
 }

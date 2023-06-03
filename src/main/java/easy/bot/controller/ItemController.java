@@ -3,9 +3,7 @@ package easy.bot.controller;
 import easy.bot.entity.Item;
 import easy.bot.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -13,6 +11,7 @@ import java.util.List;
 @RequestMapping("/store")
 public class ItemController {
 
+    @Autowired
     private ItemRepository itemRepository;
 
     @GetMapping("/items")
@@ -20,7 +19,10 @@ public class ItemController {
         return (List<Item>) itemRepository.findAll();
     }
 
-    public ItemController(ItemRepository itemRepository) {
-        this.itemRepository = itemRepository;
+    @PostMapping("/add")
+    public Item createEmployee(@RequestBody Item item) {
+        return itemRepository.save(item);
     }
+
+
 }
